@@ -1,31 +1,39 @@
 import pygame
 
 class Renderer:
-    def __init__(self, screen):
-        self.screen = screen
-        self.indexColour = (255, 0, 0)
+    screen = None
+    font = None
+    indexColour = (255, 0, 0)
 
-    def Draw(self):
-        self.screen.fill("white")
-        pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(0, 0, 60, 60))
+    def init (screen):
+        Renderer.screen = screen
+        Renderer.font = pygame.font.SysFont('Arial', 30)
+
+    def Render():
         pygame.display.flip()
 
-    def DrawCollection(self, collection, currentIndex):
-        self.screen.fill((211,211,211))
+    def DisplayText(textToDisplay, location):
+        textSurface = Renderer.font.render(textToDisplay, False, (0, 0, 0))
+        Renderer.screen.blit(textSurface, location)
 
-        width = self.screen.get_width() - 200
-        height = self.screen.get_height() - 20
+    def DrawMenu():
+        menuBounds = pygame.Rect(10, 10, 300, 700)
+        pygame.draw.rect(Renderer.screen, (211,211,211), menuBounds)
 
+    def DrawCollection(collection, currentIndex):
+        Renderer.screen.fill("white")
+        collectionBounds = pygame.Rect(330, 10, 940, 700)
+
+        pygame.draw.rect(Renderer.screen, (211,211,211), collectionBounds)
         for i, item in enumerate(collection):
-            rectLeft = (width / len(collection)) * (i + 1) + (1 * (i + 1))
-            rectWidth = width / len(collection)
-            rectHeight = height / (len(collection) / item)
-            rectTop = height - rectHeight + 10
+            rectLeft = ((collectionBounds.width / len(collection)) * i) + collectionBounds.left
+            rectWidth = collectionBounds.width / len(collection)
+            rectHeight = collectionBounds.height / (len(collection) / item)
+            rectTop = collectionBounds.height - rectHeight + collectionBounds.top
 
             colour = (0, 0, 0)
             if i == currentIndex:
                 colour = (255, 0, 0)
 
-            pygame.draw.rect(self.screen, colour, pygame.Rect(rectLeft, rectTop, rectWidth, rectHeight))
-        pygame.display.flip()
+            pygame.draw.rect(Renderer.screen, colour, pygame.Rect(rectLeft, rectTop, rectWidth, rectHeight))
 

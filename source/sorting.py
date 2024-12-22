@@ -14,7 +14,6 @@ class Sorter:
 
         for i in range(1, numberOfItems + 1):
             self.collection.append(i)
-        pass
 
     def Step(self):
         match self.sortingAlgorithm:
@@ -31,6 +30,26 @@ class Sorter:
 
     def GetCurrentIndex(self):
         return self._currentIndex
+
+    def SetSortingAlgorithm(self, newAlgorithm):
+        if type(newAlgorithm) == SortingAlgorithms:
+            self.sortingAlgorithm = newAlgorithm
+        elif type(newAlgorithm) == int:
+            if newAlgorithm >= len(SortingAlgorithms) or newAlgorithm < 0:
+                return
+            
+            self.sortingAlgorithm = SortingAlgorithms(newAlgorithm)
+
+    def GetCollectionSize(self):
+        return len(self.collection)
+
+    def SetCollectionSize(self, newSize):
+        if newSize <= 0:
+            return
+
+        self.collection = list()
+        for i in range(1, newSize + 1):
+            self.collection.append(i)
 
     def ShuffleCollection(self):
         random.shuffle(self.collection)
