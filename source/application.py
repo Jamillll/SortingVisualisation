@@ -9,7 +9,7 @@ class Application:
 
         self.clock = pygame.time.Clock()
         self.running = True
-        self.sorter = Sorter(100, SortingAlgorithms.BUBBLE)
+        self.sorter = Sorter(470, SortingAlgorithms.BUBBLE)
         self.sorterPaused = True
         Renderer.init(pygame.display.set_mode((1280, 720)))
 
@@ -66,6 +66,8 @@ class Application:
         Renderer.DisplayText("Down- collection size - 10", (15, 180))
         Renderer.DisplayText("Left/Right- change sorting", (15, 220))
         Renderer.DisplayText("Algorithm", (15, 245))
+        Renderer.DisplayText("S- Shuffle", (15, 285))
+        Renderer.DisplayText("R- Run/Stop", (15, 325))
         Renderer.Render()
 
     def Exit(self):
